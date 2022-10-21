@@ -1,23 +1,9 @@
 # Gradle
-- task: ArtifactoryGradle@1
-  inputs:
-    gradleBuildFile: 'build.gradle'
-    workDir: 'gradle-examples/gradle-example-ci-server'
-    tasks: 'artifactoryPublish'
-    usesPlugin: true
-    useWrapper: true
-    collectBuildInfo: true
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
-# Build your Java project and run tests with Gradle using a Gradle wrapper script.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
-
 trigger:
 - master
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 steps:
 - task: JFrog.jfrog-azure-devops-extension.jfrog-gradle.JFrogGradle@1
@@ -32,3 +18,22 @@ steps:
     useWrapper: true
     collectBuildInfo: true
     includeEnvVars: true
+
+
+- task: ArtifactoryGradle@1
+  inputs:
+    gradleBuildFile: 'build.gradle'
+    workDir: 'gradle-examples/gradle-example-ci-server'
+    tasks: 'artifactoryPublish'
+    usesPlugin: true
+    useWrapper: true
+    collectBuildInfo: true
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+
+
+
+
+
+
+
