@@ -10,9 +10,9 @@ steps:
   displayName: 'JFrog Gradle'
   inputs:
     workDir: 'gradle-examples/gradle-example-ci-server'
-    artifactoryResolverService: 'JWT'
+    artifactoryResolverService: 'RTF2'
     sourceRepo: 't1-maven-dev-virtual'
-    artifactoryDeployerService: 'JWT'
+    artifactoryDeployerService: 'RTF2'
     targetRepo: 't1-maven-pro-local'
     usesPlugin: true
     useWrapper: true
@@ -36,9 +36,9 @@ steps:
     gradleBuildFile: 'build.gradle'
     workDir: 'gradle-examples/gradle-example-ci-server'
     tasks: 'artifactoryPublish'
-    artifactoryResolverService: 'JWT'
+    artifactoryResolverService: 'RTF2'
     sourceRepo: 't1-maven-dev-virtual'
-    artifactoryDeployerService: 'JWT'
+    artifactoryDeployerService: 'RTF2'
     targetRepo: 't1-maven-pro-local'
     usesPlugin: true
     useWrapper: true
