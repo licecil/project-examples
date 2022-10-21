@@ -1,0 +1,55 @@
+# Gradle
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: JFrog.jfrog-azure-devops-extension.jfrog-gradle.JFrogGradle@1
+  displayName: 'JFrog Gradle'
+  inputs:
+    workDir: 'gradle-examples/gradle-example-ci-server'
+    artifactoryResolverService: 'JWT-RTF'
+    sourceRepo: 't1-maven-dev-virtual'
+    artifactoryDeployerService: 'JWT-RTF'
+    targetRepo: 't1-maven-pro-local'
+    usesPlugin: true
+    useWrapper: true
+    collectBuildInfo: true
+    includeEnvVars: true
+
+
+- task: ArtifactoryGradle@1
+  inputs:
+    gradleBuildFile: 'build.gradle'
+    workDir: 'gradle-examples/gradle-example-ci-server'
+    tasks: 'artifactoryPublish'
+    usesPlugin: true
+    useWrapper: true
+    collectBuildInfo: true
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+  
+- task: ArtifactoryGradle@1
+  inputs:
+    gradleBuildFile: 'build.gradle'
+    workDir: 'gradle-examples/gradle-example-ci-server'
+    tasks: 'artifactoryPublish'
+    artifactoryResolverService: 'JWT'
+    sourceRepo: 't1-maven-dev-virtual'
+    artifactoryDeployerService: 'JWT'
+    targetRepo: 't1-maven-pro-local'
+    usesPlugin: true
+    useWrapper: true
+    collectBuildInfo: true
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+    includeEnvVars: true
+
+
+
+
+
+
+
