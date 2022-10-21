@@ -1,0 +1,24 @@
+# Gradle
+# Build your Java project and run tests with Gradle using a Gradle wrapper script.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: JFrog.jfrog-azure-devops-extension.jfrog-gradle.JFrogGradle@1
+  displayName: 'JFrog Gradle'
+  inputs:
+    workDir: 'gradle-examples/gradle-example-ci-server'
+    artifactoryResolverService: 'JWT-RTF'
+    sourceRepo: 't1-maven-dev-virtual'
+    artifactoryDeployerService: 'JWT-RTF'
+    targetRepo: 't1-maven-pro-local'
+    usesPlugin: true
+    useWrapper: true
+    collectBuildInfo: true
+    includeEnvVars: true
